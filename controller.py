@@ -1,4 +1,5 @@
 import model, view
+import string
 
 
 def main_menu():
@@ -68,8 +69,10 @@ def main_menu():
                        print('Контакт не удален!\n') 
                        open_contacts()
             case 6:
-                print('Найдены совпадения : \n')
+                
                 search_contact()
+                # print('Найдены совпадения : \n')
+                view.printPhoneBook()
                 open_contacts()
             case 8:
                 break
@@ -101,10 +104,10 @@ def save_contact():
 
 
 def add_contact():
-    '''функция для добавления контакта. при помощи append наш новый контакт добавляется в конец списка '''
-    name = input('Введите имя ')
-    surname = input('Введите фамилию ')
-    last_name = input('Введите отчество ')
+    '''функция для добавления контакта. при помощи append наш новый контакт добавляется в конец списка + использование str.capitalize - для удобного поиска '''
+    name = str.capitalize(input('Введите имя '))
+    surname = str.capitalize(input('Введите фамилию '))
+    last_name = str.capitalize(input('Введите отчество '))
     number = input('Введите телефон ')
     contact = f'{name}; {surname}; {last_name}; {number};';''
     model.phonebook.append(contact)
@@ -128,24 +131,23 @@ def change_contact():
     view.printPhoneBook()
     
 def search_contact():
-    '''Функция для поиска контакта, делаем двойной цикл 1й-для вытаскивания контакта целиком, 2й для разделения контакта на составляющие 
-       и в них ищем совпадения. Для улучшения поиска, нужно список перевести в нижний регистр.   '''
+    '''Функция для поиска контакта, делаем  цикл для вытаскивания контакта  
+       и ищем совпадения. Для улучшения поиска, нужно список перевести в нижний регистр.   '''
    
     
     contact = model.phonebook
     
     search_cont=[]
-    elem = input("Введите искомый элемент: ")
+    elem = str.capitalize(input("Введите искомый элемент: "))
     for i in contact:
         if elem in i:
             search_cont.append(i)
+    print('\nНайдены совпадения : \n')
     print(f'{search_cont}\n')
     
-    view.printPhoneBook()
+    # view.printPhoneBook()
     
 
 def open_contacts():
     pass
 
-def show_contact():
-    pass
